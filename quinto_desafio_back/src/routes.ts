@@ -49,3 +49,14 @@ routes.get("/veiculos", async (req, res) => {
   });
   res.json(veiculos);
 });
+
+// Retorna um veículo específico
+// Exemplo: /veiculos/1
+routes.get("/veiculos/:id", async (req, res) => {
+  const veiculo = await prisma.veiculos.findUnique({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.json(veiculo);
+});
