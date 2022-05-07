@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts"
+    "dev": "ts-node-dev src/server.ts",
+    "test": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
@@ -29,3 +30,4 @@
     "nodemailer": "^6.7.5"
   }
 }
+

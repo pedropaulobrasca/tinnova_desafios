@@ -1,25 +1,19 @@
 import { PrismaClient } from "@prisma/client";
 import express from "express";
+import { VeiculosService } from "./services/Veiculos/veiculos-service";
 
 export const routes = express.Router();
 const prisma = new PrismaClient();
 
-routes.get("/", (req, res) => {
-  res.json({ message: "Hello World!!" });
-});
-
 // Cadastra um novo veículo
 routes.post("/veiculos", async (req, res) => {
-  const veiculo = await prisma.veiculos.create({
-    data: {
-      veiculo: req.body.veiculo,
-      marca: req.body.marca,
-      ano: req.body.ano,
-      descricao: req.body.descricao,
-      vendido: req.body.vendido,
-    },
-  });
-  res.json(veiculo);
+  const veiculosService = new VeiculosService(prisma);
+  try {
+    const createdVeiculo = await veiculosService.create(req.body);
+    res.status(201).json(createdVeiculo);
+  } catch (error) {
+    res.status(400).json({ error });
+  }
 });
 
 // Retorna todos os veículos de acordo com os filtros
