@@ -78,3 +78,21 @@ routes.put("/veiculos/:id", async (req, res) => {
   });
   res.json(veiculo);
 });
+
+// Atualiza apenas alguns dados de um veículo específico
+// Exemplo: /veiculos/1
+routes.patch("/veiculos/:id", async (req, res) => {
+  const veiculo = await prisma.veiculos.update({
+    where: {
+      id: req.params.id,
+    },
+    data: {
+      veiculo: req.body.veiculo,
+      marca: req.body.marca,
+      ano: req.body.ano,
+      descricao: req.body.descricao,
+      vendido: req.body.vendido,
+    },
+  });
+  res.json(veiculo);
+});
