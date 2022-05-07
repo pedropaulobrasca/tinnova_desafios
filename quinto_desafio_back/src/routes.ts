@@ -96,3 +96,14 @@ routes.patch("/veiculos/:id", async (req, res) => {
   });
   res.json(veiculo);
 });
+
+// Deleta um veículo específico
+// Exemplo: /veiculos/1
+routes.delete("/veiculos/:id", async (req, res) => {
+  const veiculo = await prisma.veiculos.delete({
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.json(veiculo);
+});
