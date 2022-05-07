@@ -1,0 +1,21 @@
+{
+  "name": "primeiro_desafio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "primeiro_desafio": "ts-node-dev ./primeiro_desafio.ts",
+    "segundo_desafio": "ts-node-dev ./segundo_desafio.ts",
+    "terceiro_desafio": "ts-node-dev ./terceiro_desafio.ts",
+    "quarto_desafio": "ts-node-dev ./quarto_desafio.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.31",
+    "ts-node": "^10.7.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.4"
+  }
+}
