@@ -23,7 +23,7 @@ const marcas = [
 ];
 
 export interface VeiculoProps {
-  id?: number;
+  id?: string;
   veiculo: string;
   marca: string;
   ano: number;
@@ -34,6 +34,46 @@ export interface VeiculoProps {
 export class VeiculosService {
   constructor(private prisma: PrismaClient) {}
 
+  public async findAll(
+    filtros: {
+      veiculo?: string;
+      marca?: string;
+      ano?: number;
+      descricao?: string;
+      vendido?: boolean;
+    } = {}
+  ) {
+    const veiculos = await this.prisma.veiculos.findMany({
+      where: {
+        veiculo: {
+          contains: filtros.veiculo && filtros.veiculo.toString(),
+        },
+        marca: {
+          equals: filtros.marca && filtros.marca.toString(),
+        },
+        ano: {
+          equals: filtros.ano && Number(filtros.ano),
+        },
+        descricao: {
+          contains: filtros.descricao && filtros.descricao.toString(),
+        },
+        vendido: {
+          equals: filtros.vendido && Boolean(Number(filtros.vendido)),
+        },
+      },
+    });
+    return veiculos;
+  }
+
+  public async findOne(id: string) {
+    const veiculo = await this.prisma.veiculos.findUnique({
+      where: {
+        id,
+      },
+    });
+    return veiculo;
+  }
+
   public async create(veiculo: VeiculoProps) {
     // As marcas não poderão ser escritas erroneamente comparadas com as marcas disponíveis
     if (!marcas.includes(veiculo.marca)) {
@@ -41,7 +81,10 @@ export class VeiculosService {
     }
 
     // O ano deverá ser um número inteiro com apenas o ano
-    if (typeof veiculo.ano !== "number" || veiculo.ano.toString().length !== 4) {
+    if (
+      typeof veiculo.ano !== "number" ||
+      veiculo.ano.toString().length !== 4
+    ) {
       throw new Error("Ano inválido");
     }
 
@@ -55,5 +98,42 @@ export class VeiculosService {
       },
     });
     return createdVeiculo;
+  }
+
+  public async update(id: string, veiculo: VeiculoProps) {
+    const updatedVeiculo = await this.prisma.veiculos.update({
+      where: {
+        id,
+      },
+      data: {
+        veiculo: veiculo.veiculo,
+        marca: veiculo.marca,
+        ano: veiculo.ano,
+        descricao: veiculo.descricao,
+        vendido: veiculo.vendido,
+      },
+    });
+    return updatedVeiculo;
+  }
+
+  public async updatePartial(id: string, veiculo: Partial<VeiculoProps>) {
+    const updatedVeiculo = await this.prisma.veiculos.update({
+      where: {
+        id,
+      },
+      data: {
+        ...veiculo,
+      },
+    });
+    return updatedVeiculo;
+  }
+
+  public async delete(id: string) {
+    const deletedVeiculo = await this.prisma.veiculos.delete({
+      where: {
+        id,
+      },
+    });
+    return deletedVeiculo;
   }
 }

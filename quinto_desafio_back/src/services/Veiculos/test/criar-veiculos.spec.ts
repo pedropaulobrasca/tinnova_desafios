@@ -5,18 +5,6 @@ const prisma = new PrismaClient();
 const veiculosService = new VeiculosService(prisma);
 
 describe("Criar um veiculo", () => {
-  it("Espero criar um veículo", async () => {
-    await expect(
-      veiculosService.create({
-        veiculo: "Fusca",
-        marca: "Volkswagen",
-        ano: 2019,
-        descricao: "Veículo de luxo",
-        vendido: false,
-      })
-    ).resolves.not.toThrow();
-  });
-
   it("Não será possivel criar um veículo com a marca escrito errada.", async () => {
     await expect(
       veiculosService.create({
