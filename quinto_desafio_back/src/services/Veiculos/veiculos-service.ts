@@ -111,6 +111,7 @@ export class VeiculosService {
         ano: veiculo.ano,
         descricao: veiculo.descricao,
         vendido: veiculo.vendido,
+        updatedAt: new Date(),
       },
     });
     return updatedVeiculo;
@@ -123,6 +124,7 @@ export class VeiculosService {
       },
       data: {
         ...veiculo,
+        updatedAt: new Date(),
       },
     });
     return updatedVeiculo;
