@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1651961589841" clover="3.2.0">
-  <project timestamp="1651961589841" name="All files">
+<coverage generated="1651961702340" clover="3.2.0">
+  <project timestamp="1651961702340" name="All files">
     <metrics statements="139" coveredstatements="60" conditionals="5" coveredconditionals="4" methods="7" coveredmethods="2" elements="151" coveredelements="66" complexity="0" loc="139" ncloc="139" packages="1" files="1" classes="1"/>
     <file name="veiculos-service.ts" path="D:\Projetos\tinnova_desafios\quinto_desafio_back\src\services\Veiculos\veiculos-service.ts">
       <metrics statements="139" coveredstatements="60" conditionals="5" coveredconditionals="4" methods="7" coveredmethods="2"/>
