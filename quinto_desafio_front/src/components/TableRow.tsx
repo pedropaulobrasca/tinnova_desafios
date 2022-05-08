@@ -1,5 +1,4 @@
-import axios from "axios";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { api } from "../lib/api";
 import { Pencil, Trash } from "phosphor-react";
 
@@ -109,7 +108,7 @@ export function TableRow({ data }: TableRowProps) {
         <td className="px-1 py-1 flex justify-center items-center">
           <input
             type={"checkbox"}
-            className="text-white bg-gray-800 rounded-lg mt-3"
+            className="text-white bg-gray-800 rounded-lg mt-3 checked:text-green-500"
             checked={data.vendido}
             onChange={(event) => setVendido(event.target.checked.toString())}
             contentEditable="true"

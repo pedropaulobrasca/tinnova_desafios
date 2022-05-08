@@ -74,6 +74,41 @@ export class VeiculosService {
     return veiculo;
   }
 
+  public async findByDecada(decade: number) {
+    const veiculos = await this.prisma.veiculos.findMany({
+      where: {
+        ano: {
+          gte: decade,
+          lte: decade + 9,
+        },
+      },
+    });
+    return { data: veiculos, total: veiculos.length };
+  }
+
+  public async findByMarcas(marca: string) {
+    const veiculos = await this.prisma.veiculos.findMany({
+      where: {
+        marca: {
+          contains: marca,
+        },
+      },
+    });
+    return { data: veiculos, total: veiculos.length };
+  }
+
+  public async findBySemanaAtual() {
+    const veiculos = await this.prisma.veiculos.findMany({
+      where: {
+        createdAt: {
+          gte: new Date(new Date().setDate(new Date().getDate() - 7)),
+          lte: new Date(),
+        },
+      },
+    });
+    return { data: veiculos, total: veiculos.length };
+  }
+
   public async create(veiculo: VeiculoProps) {
     // As marcas não poderão ser escritas erroneamente comparadas com as marcas disponíveis
     if (!marcas.includes(veiculo.marca)) {

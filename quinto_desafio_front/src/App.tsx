@@ -13,6 +13,11 @@ function App() {
   // Obtendo a lista de veículos da api com axios
   const [veiculos, setVeiculos] = useState<Veiculo[]>([]);
 
+  const [veiculosPorMarca, setVeiculosPorMarca] = useState<Veiculo[]>([]);
+  const [veiculosNaoVendidos, setVeiculosNaoVendidos] = useState<Veiculo[]>([]);
+  const [veiculosVendidos, setVeiculosVendidos] = useState<Veiculo[]>([]);
+  const [vendidosNaSemana, setVendidosNaSemana] = useState<Veiculo[]>([]);
+
   useEffect(() => {
     api.get("/veiculos").then((response) => {
       setVeiculos(response.data);
@@ -155,6 +160,33 @@ function App() {
                 <TableRow data={veiculo} />
               ))}
             </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan={1} className="px-4 py-2">
+                  <div className="flex justify-center">
+                    <span>Veiculos total: {veiculos.length}</span>
+                  </div>
+                </td>
+                <td colSpan={1} className="px-4 py-2">
+                  <div className="flex justify-center">
+                    <span>
+                      Veiculos não vendidos: {veiculosNaoVendidos.length}
+                    </span>
+                  </div>
+                </td>
+                <td colSpan={1} className="px-4 py-2">
+                  <div className="flex justify-center">
+                    <span>
+                      Veiculos vendidos:{" "}
+                      {veiculos.length - veiculosNaoVendidos.length}
+                    </span>
+                  </div>
+                </td>
+                <td colSpan={1} className="px-4 py-2">
+                  <div className="flex justify-center"></div>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </section>
